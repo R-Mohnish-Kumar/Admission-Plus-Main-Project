@@ -6,6 +6,7 @@ import 'package:admission_plus/providers/college_user_provider.dart';
 import 'package:admission_plus/providers/user_provider.dart';
 import 'package:admission_plus/screens/TabsScreen.dart';
 import 'package:admission_plus/screens/college/HomeScreenCollege.dart';
+import 'package:admission_plus/screens/college/applications.dart';
 import 'package:admission_plus/screens/student/HomeScreen.dart';
 import 'package:admission_plus/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -40,18 +41,18 @@ class AuthService {
           });
 
     } catch (e) {
-      showSnackBar(context, e.toString());
       navigator.pop(context);
       print(e);
     }
   }
 
 // Update College
-  void updateCollegeUser(BuildContext context, id, body) async {
+  void updateCollegeUser(BuildContext context, id, CollegeUser collegeUser) async {
+    final navigator = Navigator.of(context);
     try {
-      http.Response res = await http.put(
+      http.Response res = await http.patch(
           Uri.parse('${Constant.uri}/api/college/update/$id'),
-          body: body,
+          body: collegeUser.toJson(),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           });
@@ -62,12 +63,14 @@ class AuthService {
             if (res.statusCode == 200) {
               showSnackBar(context, 'College User Data Updated..!');
               print(jsonDecode(res.body));
+              navigator.pop(context);
             } else {
               showSnackBar(context, 'College User Data Not Updated..!');
             }
           });
     } catch (e) {
-      showSnackBar(context, e.toString());
+      navigator.pop(context);
+      print(e);
     }
   }
 
@@ -231,7 +234,7 @@ class AuthService {
             showSnackBar(context, "Logged In..");
             navigator.pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (context) => const HomeScreenCollege()),
+                  builder: (context) => const Applications()),
               (route) => false,
             );
           });

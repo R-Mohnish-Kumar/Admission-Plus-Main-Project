@@ -1,10 +1,8 @@
 import 'dart:ui';
-
 import 'package:admission_plus/models/user.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 import '../../services/auth_services.dart';
+
 
 class UpdateStudentDataScreen extends StatefulWidget {
   User user;
@@ -32,11 +30,13 @@ class _UpdateStudentDataScreenState extends State<UpdateStudentDataScreen> {
   final schoolNameInput = TextEditingController();
   final highSchoolInput = TextEditingController();
   final authServices = AuthService();
+  
+
   void updateStudentProfile() {
     authServices.updateUser(
         context: context,
-        id : widget.user.id,
-        user :User(
+        id: widget.user.id,
+        user: User(
             id: widget.user.id,
             email: emailInput.text == '' ? widget.user.email : emailInput.text,
             name: fullNameInput.text == ''

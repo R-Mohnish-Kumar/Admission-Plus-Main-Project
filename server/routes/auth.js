@@ -179,7 +179,7 @@ authRouter.put("/api/update/:id", async (req,res)=>{
 })
 
 // Update College
-authRouter.put("/api/college/update/:id", async (req,res)=>{
+authRouter.patch("/api/college/update/:id", async (req,res)=>{
     try{
     const updateData=req.body;
     await CollegeUser.findOneAndUpdate(

@@ -37,14 +37,11 @@ class MainDrawerCollege extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10,),
-        buildListTile("Home", Icon(Icons.home,color: Theme.of(context).primaryColor), () { 
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomeScreenCollege()));
-        }),
+        buildListTile("Dashboard", Icon(Icons.school,color: Theme.of(context).primaryColor), () {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Applications()));
+         }),
         buildListTile("College Profile", Icon(Icons.person,color: Theme.of(context).primaryColor), () {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> CollegeProfile()));
-         }),
-        buildListTile("Application Dashboard", Icon(Icons.school,color: Theme.of(context).primaryColor), () {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Applications()));
          }),
         buildListTile("Accepted Applications", Icon(Icons.photo_album,color: Theme.of(context).primaryColor), () { 
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> AcceptedApplications()));

@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               showDialog(
                                   context: context,
                                   builder: (ctx) {
-                                    return CollegeBreifScreen(snapshot.data![i]);
+                                    return CollegeBreifScreen(snapshot.data![i],user);
                                   });
                             },
                             leading: CircleAvatar(

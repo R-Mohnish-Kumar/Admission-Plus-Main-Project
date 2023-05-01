@@ -1,11 +1,13 @@
 import 'package:admission_plus/models/collegeUser.dart';
+import 'package:admission_plus/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import './preferenceAndApplyScreen.dart';
 
 class CollegeBreifScreen extends StatefulWidget {
   CollegeUser collegeUser;
-  CollegeBreifScreen(this.collegeUser);
+  User user;
+  CollegeBreifScreen(this.collegeUser, this.user);
 
   @override
   _CollegeBreifScreenState createState() => _CollegeBreifScreenState();
@@ -279,7 +281,7 @@ class _CollegeBreifScreenState extends State<CollegeBreifScreen> {
                       showDialog(
                           context: context,
                           builder: (ctx) {
-                            return PreferenceAndApplyScreen(widget.collegeUser.departments,widget.collegeUser.applicationFee);
+                            return PreferenceAndApplyScreen(widget.collegeUser.departments,widget.collegeUser.applicationFee,widget.user.name!,widget.user.contactNo!,widget.user.email!);
                           });
                     },
                     child: Text(
