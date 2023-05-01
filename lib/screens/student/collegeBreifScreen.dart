@@ -1,6 +1,7 @@
 import 'package:admission_plus/models/collegeUser.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import './preferenceAndApplyScreen.dart';
 
 class CollegeBreifScreen extends StatefulWidget {
   CollegeUser collegeUser;
@@ -42,7 +43,7 @@ class _CollegeBreifScreenState extends State<CollegeBreifScreen> {
                 child: Text(
                   widget.collegeUser.collegeName,
                   style: TextStyle(
-                    decoration: TextDecoration.underline,
+                      decoration: TextDecoration.underline,
                       fontFamily: 'Raleway',
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).primaryColor,
@@ -274,7 +275,13 @@ class _CollegeBreifScreenState extends State<CollegeBreifScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (ctx) {
+                            return PreferenceAndApplyScreen(widget.collegeUser.departments,widget.collegeUser.applicationFee);
+                          });
+                    },
                     child: Text(
                       '       Apply       ',
                       style: TextStyle(

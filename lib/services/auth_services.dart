@@ -140,7 +140,8 @@ class AuthService {
           foundedYear: '',
           rank: '',
           affiliatedTo: '',
-          website: '');
+          website: '',
+          applicationFee: '');
       final navigator = Navigator.of(context);    
       http.Response res = await http.post(
           Uri.parse('${Constant.uri}/api/college/signup'),

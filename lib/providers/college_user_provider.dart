@@ -15,7 +15,8 @@ class CollegeUserProvider extends ChangeNotifier {
       foundedYear: '',
       rank: '',
       affiliatedTo: '',
-      website: '');
+      website: '',
+      applicationFee: '');
   CollegeUser get collegeUser => _collegeUser;
 
   void setCollegeUser(String collegeUser) {

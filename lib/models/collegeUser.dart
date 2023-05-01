@@ -14,6 +14,7 @@ class CollegeUser {
   final String rank;
   final String affiliatedTo;
   final String website;
+  final String applicationFee;
 
   CollegeUser(
       {required this.id,
@@ -28,7 +29,8 @@ class CollegeUser {
       required this.foundedYear,
       required this.rank,
       required this.affiliatedTo,
-      required this.website});
+      required this.website,
+      required this.applicationFee});
 
   Map<String, dynamic> toMap() {
     return {
@@ -44,6 +46,7 @@ class CollegeUser {
       'rank': rank,
       'affiliatedTo': affiliatedTo,
       'website': website,
+      'applicationFee' : applicationFee,
     };
   }
 
@@ -62,6 +65,7 @@ class CollegeUser {
       rank: map['rank'] ?? '',
       affiliatedTo: map['affiliatedTo'] ?? '',
       website: map['website'] ?? '',
+      applicationFee: map['applicationFee'] ?? '',
     );
   }
 

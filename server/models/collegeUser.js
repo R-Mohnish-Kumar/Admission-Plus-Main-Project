@@ -50,6 +50,10 @@ const collegeUserSchema = mongoose.Schema({
         required:false,
         type:String,
     },
+    applicationFee:{
+        required: false,
+        type: String,
+    }
 });
 const CollegeUser=mongoose.model("College_User",collegeUserSchema);
 module.exports=CollegeUser;
