@@ -278,12 +278,20 @@ class _CollegeBreifScreenState extends State<CollegeBreifScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (ctx) {
-                            return PreferenceAndApplyScreen(widget.collegeUser.departments,widget.collegeUser.applicationFee,widget.user.name!,widget.user.contactNo!,widget.user.email!);
-                          });
-                    },
+                            showDialog(
+                                context: context,
+                                builder: (ctx) {
+                                  return PreferenceAndApplyScreen(
+                                    widget.collegeUser.departments,
+                                    widget.collegeUser.applicationFee,
+                                    widget.user.name!,
+                                    widget.user.contactNo!,
+                                    widget.user.email!,
+                                    widget.collegeUser,
+                                    widget.user,
+                                  );
+                                });
+                          },
                     child: Text(
                       '       Apply       ',
                       style: TextStyle(

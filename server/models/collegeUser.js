@@ -53,6 +53,8 @@ const collegeUserSchema = mongoose.Schema({
     applicationFee:{
         required: false,
         type: String,
+    },
+    studentsApplied:{
     }
 });
 const CollegeUser=mongoose.model("College_User",collegeUserSchema);

@@ -89,7 +89,8 @@ class _UpdateCollegeDataScreenState extends State<UpdateCollegeDataScreen> {
                 : websiteInput.text,
             applicationFee: applicationFeeInput.text == ''
                 ? widget.collegeUser.applicationFee
-                : applicationFeeInput.text));
+                : applicationFeeInput.text,
+                studentsApplied: widget.collegeUser.studentsApplied));
   }
 
   @override

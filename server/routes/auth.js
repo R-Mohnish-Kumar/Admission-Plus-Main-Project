@@ -165,7 +165,7 @@ authRouter.put("/api/update/:id", async (req,res)=>{
     const updateData=req.body;
     await User.findOneAndUpdate(
         {_id: req.params.id},
-        {$set:updateData}).then((err,result)=>{
+        {$push:updateData}).then((err,result)=>{
             if(err) return res.status(500).json({msg:err});
             const msg={
                 msg:"Data Updated Successfully..!",
@@ -184,7 +184,45 @@ authRouter.patch("/api/college/update/:id", async (req,res)=>{
     const updateData=req.body;
     await CollegeUser.findOneAndUpdate(
         {_id: req.params.id},
-        {$set:updateData}).then((err,result)=>{
+        {$push:updateData}).then((err,result)=>{
+            if(err) return res.status(500).json({msg:err});
+            const msg={
+                msg:"Data Updated Successfully..!",
+                id:req.params.id,
+            };
+            return res.json(msg);
+        });
+    }catch(e){
+        res.status(500).json({error: e.message});
+    }
+})
+
+// Add Student Application to College
+authRouter.patch("/api/college/update/application/:id", async (req,res)=>{
+    try{
+    const updateData=req.body;
+    await CollegeUser.updateOne(
+        {_id: req.params.id},
+        {$push:{'studentsApplied':updateData}}).then((err,result)=>{
+            if(err) return res.status(500).json({msg:err});
+            const msg={
+                msg:"Data Updated Successfully..!",
+                id:req.params.id,
+            };
+            return res.json(msg);
+        });
+    }catch(e){
+        res.status(500).json({error: e.message});
+    }
+})
+
+// Add Student Application to Student Profile
+authRouter.patch("/api/student/update/application/:id", async (req,res)=>{
+    try{
+    const updateData=req.body;
+    await User.updateOne(
+        {_id: req.params.id},
+        {$push:{'appliedColleges':updateData}}).then((err,result)=>{
             if(err) return res.status(500).json({msg:err});
             const msg={
                 msg:"Data Updated Successfully..!",

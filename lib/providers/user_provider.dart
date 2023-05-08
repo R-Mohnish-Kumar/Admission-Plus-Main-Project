@@ -21,7 +21,11 @@ class UserProvider extends ChangeNotifier {
       schoolName: '',
       XIIthMarks: '',
       XIIthMarksheetLink: '',
-      highSchoolName: '');
+      highSchoolName: '',
+      collegePreference1: '',
+      collegePreference2: '',
+      collegePreference3: '',
+      appliedColleges: []);
 
   User get user => _user;
 

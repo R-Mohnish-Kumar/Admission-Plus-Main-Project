@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:admission_plus/models/MongoDBModel.dart';
+import 'package:admission_plus/models/user.dart';
 import 'package:admission_plus/providers/college_user_provider.dart';
 import 'package:admission_plus/providers/user_provider.dart';
 import 'package:admission_plus/screens/TabsScreen.dart';

@@ -22,6 +22,10 @@ class User {
   final String? XIIthMarks;
   final String? XIIthMarksheetLink;
   final String? highSchoolName;
+  final String? collegePreference1;
+  final String? collegePreference2;
+  final String? collegePreference3;
+  final List? appliedColleges;
 
   User(
       {required this.id,
@@ -42,7 +46,11 @@ class User {
       required this.schoolName,
       required this.XIIthMarks,
       required this.XIIthMarksheetLink,
-      required this.highSchoolName});
+      required this.highSchoolName,
+      required this.collegePreference1,
+      required this.collegePreference2,
+      required this.collegePreference3,
+      required this.appliedColleges});
 
 Map<String, dynamic> toMap() {
     return {
@@ -64,6 +72,10 @@ Map<String, dynamic> toMap() {
       'XIIthMarks':XIIthMarks,
       'XIIthMarksheetLink':XIIthMarksheetLink,
       'highSchoolName':highSchoolName,
+      'collegePreference1':collegePreference1,
+      'collegePreference2':collegePreference2,
+      'collegePreference3':collegePreference3,
+      'appliedColleges' : appliedColleges,
     };
   }
 
@@ -88,6 +100,10 @@ Map<String, dynamic> toMap() {
       XIIthMarks: map['XIIthMarks'] ?? '',
       XIIthMarksheetLink: map['XIIthMarksheetLink'] ?? '',
       highSchoolName: map['highSchoolName'] ?? '',
+      collegePreference1: map['collegePreference1'] ?? '',
+      collegePreference2: map['collegePreference2'] ?? '',
+      collegePreference3: map['collegePreference3'] ?? '',
+      appliedColleges:map['appliedColleges'] ?? [],
 
     );
   }

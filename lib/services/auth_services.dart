@@ -73,6 +73,61 @@ class AuthService {
       print(e);
     }
   }
+// Add Student Application to College
+  void updateApplicationCollegeUser(BuildContext context, id, User studentUser) async {
+    final navigator = Navigator.of(context);
+    try {
+      http.Response res = await http.patch(
+          Uri.parse('${Constant.uri}/api/college/update/application/$id'),
+          body: studentUser.toJson(),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          });
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            if (res.statusCode == 200) {
+              showSnackBar(context, 'College User Data Updated..!');
+              print(jsonDecode(res.body));
+              navigator.pop(context);
+            } else {
+              showSnackBar(context, 'College User Data Not Updated..!');
+            }
+          });
+    } catch (e) {
+      navigator.pop(context);
+      print(e);
+    }
+  }
+
+  // Add Student Application to Student Profile
+  void updateApplicationStudentUser(BuildContext context, id, CollegeUser collegeUser) async {
+    final navigator = Navigator.of(context);
+    try {
+      http.Response res = await http.patch(
+          Uri.parse('${Constant.uri}/api/student/update/application/$id'),
+          body: collegeUser.toJson(),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          });
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            if (res.statusCode == 200) {
+              showSnackBar(context, 'Student Data Updated..!');
+              print(jsonDecode(res.body));
+              navigator.pop(context);
+            } else {
+              showSnackBar(context, 'Student Data Not Updated..!');
+            }
+          });
+    } catch (e) {
+      navigator.pop(context);
+      print(e);
+    }
+  }
 
 // Sign Up Student
   void signUpUser(
@@ -100,7 +155,11 @@ class AuthService {
           schoolName: '',
           XIIthMarks: '',
           XIIthMarksheetLink: '',
-          highSchoolName: '');
+          highSchoolName: '',
+          collegePreference1: '',
+          collegePreference2: '',
+          collegePreference3: '',
+          appliedColleges: []);
       final navigator = Navigator.of(context);    
       http.Response res = await http.post(
           Uri.parse('${Constant.uri}/api/signup'),
@@ -144,7 +203,8 @@ class AuthService {
           rank: '',
           affiliatedTo: '',
           website: '',
-          applicationFee: '');
+          applicationFee: '',
+          studentsApplied: []);
       final navigator = Navigator.of(context);    
       http.Response res = await http.post(
           Uri.parse('${Constant.uri}/api/college/signup'),

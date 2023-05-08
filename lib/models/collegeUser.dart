@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:admission_plus/models/user.dart';
+
 class CollegeUser {
   final String id;
   final String email;
@@ -15,6 +17,7 @@ class CollegeUser {
   final String affiliatedTo;
   final String website;
   final String applicationFee;
+  final List studentsApplied;
 
   CollegeUser(
       {required this.id,
@@ -30,7 +33,8 @@ class CollegeUser {
       required this.rank,
       required this.affiliatedTo,
       required this.website,
-      required this.applicationFee});
+      required this.applicationFee,
+      required this.studentsApplied});
 
   Map<String, dynamic> toMap() {
     return {
@@ -47,6 +51,7 @@ class CollegeUser {
       'affiliatedTo': affiliatedTo,
       'website': website,
       'applicationFee' : applicationFee,
+      'studentsApplied' :studentsApplied
     };
   }
 
@@ -66,6 +71,7 @@ class CollegeUser {
       affiliatedTo: map['affiliatedTo'] ?? '',
       website: map['website'] ?? '',
       applicationFee: map['applicationFee'] ?? '',
+      studentsApplied: map['studentsApplied'] ?? [],
     );
   }
 

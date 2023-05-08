@@ -81,7 +81,11 @@ class _UpdateStudentDataScreenState extends State<UpdateStudentDataScreen> {
                 : XIIthMarksheetLinkInput.text,
             highSchoolName: highSchoolInput.text == ''
                 ? widget.user.highSchoolName
-                : highSchoolInput.text));
+                : highSchoolInput.text,
+                collegePreference1: widget.user.collegePreference1,
+                collegePreference2: widget.user.collegePreference2,
+                collegePreference3: widget.user.collegePreference3,
+                appliedColleges: widget.user.appliedColleges));
   }
 
   @override

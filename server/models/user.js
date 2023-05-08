@@ -78,6 +78,21 @@ const userSchema = mongoose.Schema({
         required:false,
         type:String,
     },
+    collegePreference1:{
+        required:false,
+        type:String,
+    },
+    collegePreference2:{
+        required:false,
+        type:String,
+    },
+    collegePreference3:{
+        required:false,
+        type:String,
+    },
+    appliedColleges:{
+
+    }
 });
 const User=mongoose.model("User",userSchema);
 module.exports=User;

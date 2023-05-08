@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import '../../services/auth_services.dart';
+import 'package:admission_plus/models/collegeUser.dart';
+import 'package:admission_plus/models/user.dart';
 class PreferenceAndApplyScreen extends StatefulWidget {
   List departments;
   String applicationFee;
@@ -9,7 +12,9 @@ class PreferenceAndApplyScreen extends StatefulWidget {
   String studentName;
   String studentEmail;
   String studentContact;
-  PreferenceAndApplyScreen(this.departments, this.applicationFee, this.studentName,this.studentEmail,this.studentContact) {
+  CollegeUser collegeUser;
+  User user;
+  PreferenceAndApplyScreen(this.departments, this.applicationFee, this.studentName,this.studentEmail,this.studentContact,this.collegeUser,this.user) {
     selectedValue1 = departments[0];
     preferenceValue2 = departments[0];
     preferencevalue3 = departments[0];
@@ -32,20 +37,21 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
   }
 
   void handlePaymentSuccess(PaymentSuccessResponse response) {
-    print(
-        'Payment Successfull : ${response.paymentId} ${response.orderId} ${response.signature}');
+    print('Payment Successfull : ${response.paymentId} ${response.orderId} ${response.signature}');
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
               title: const Text('Payment Successful..!'),
               content: Text(
-                  'Payment Details :- Payment Id: ${response.paymentId} Order Id: ${response.orderId} Signature: ${response.signature}'),
+                  'Payment Details :- Payment Id: ${response.paymentId}'),
               actions: [
                 TextButton(
                     onPressed: () => Navigator.of(context).pop(),
                     child: Text('Okay')),
               ],
             ));
+      authServices.updateApplicationCollegeUser(context,widget.collegeUser.id , widget.user);
+      authServices.updateApplicationStudentUser(context,widget.user.id, widget.collegeUser);
   }
 
   void handlePaymentFailure(PaymentFailureResponse response) {
@@ -54,9 +60,9 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-              title: Text('Payment Failed..:( ${response.error}'),
+              title: Text('Payment Failed..:('),
               content: Text(
-                  'Message: ${response.message}'),
+                  'Error: ${response.error}'),
               actions: [
                 TextButton(
                     onPressed: () => Navigator.of(context).pop(),
@@ -80,6 +86,7 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
               ],
             ));
   }
+  final authServices = AuthService();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -237,7 +244,6 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
                   };
                   try{
                     razorPay.open(options);
-                    
                   }catch(e){
                     debugPrint(e.toString());
                   }
