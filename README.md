@@ -1,4 +1,4 @@
-# admission_plus
+# Admission Plus: A Flutter based Student Enrolment System
 
 A new Flutter project.
 
