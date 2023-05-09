@@ -63,7 +63,7 @@ class _CollegeBreifScreenState extends State<CollegeBreifScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    "https://aamec.edu.in/images/headers/IMG_20190611_115459.jpg",
+                    widget.collegeUser.collegeImageUrl == '' ? 'No Image' : widget.collegeUser.collegeImageUrl,
                     width: MediaQuery.of(context).size.width,
                   ),
                 ),

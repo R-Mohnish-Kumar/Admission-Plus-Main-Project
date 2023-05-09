@@ -6,6 +6,7 @@ class CollegeUserProvider extends ChangeNotifier {
       id: '',
       email: '',
       collegeName: '',
+      collegeImageUrl: '',
       description: '',
       token: '',
       password: '',
@@ -17,7 +18,8 @@ class CollegeUserProvider extends ChangeNotifier {
       affiliatedTo: '',
       website: '',
       applicationFee: '',
-      studentsApplied: []);
+      studentsApplied: [],
+      isFavorite: false);
   CollegeUser get collegeUser => _collegeUser;
 
   void setCollegeUser(String collegeUser) {

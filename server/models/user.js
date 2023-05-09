@@ -92,6 +92,9 @@ const userSchema = mongoose.Schema({
     },
     appliedColleges:{
 
+    },
+    favoriteColleges:{
+        
     }
 });
 const User=mongoose.model("User",userSchema);

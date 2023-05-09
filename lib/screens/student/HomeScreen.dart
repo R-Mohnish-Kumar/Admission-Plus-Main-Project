@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Future<http.Response> res =  http.get(
     //         Uri.parse('${Constant.uri}/getcollege'));
-
+    List<CollegeUser> favoriteColleges = [];
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -87,7 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               showDialog(
                                   context: context,
                                   builder: (ctx) {
-                                    return CollegeBreifScreen(snapshot.data![i],user);
+                                    return CollegeBreifScreen(
+                                        snapshot.data![i], user);
                                   });
                             },
                             leading: CircleAvatar(
@@ -104,7 +105,21 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             trailing: TextButton.icon(
-                              onPressed: () {},
+                              onPressed: () {
+                                final existingIndex = favoriteColleges.indexWhere((college) => college.id == snapshot.data![i].id);
+                                if (existingIndex >= 0) {
+                                  setState(() {
+                                    favoriteColleges.removeAt(existingIndex);
+                                  });
+                                } else {
+                                  favoriteColleges.add(snapshot.data!
+                                      .firstWhere((college) =>
+                                          college.id == snapshot.data![i].id));
+                                  authService.updateFavouriteCollegeInStudentUser(context, user.id, snapshot.data!
+                                      .firstWhere((college) =>
+                                          college.id == snapshot.data![i].id));        
+                                }
+                              },
                               icon: Icon(
                                 Icons.favorite_border,
                                 color: Theme.of(context).primaryColor,
@@ -115,7 +130,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Theme.of(context).primaryColor),
                               ),
                             ),
-                          ));
+                          )
+                          );
                     }));
               } else if (snapshot.hasError) {
                 return Text(snapshot.error.toString());

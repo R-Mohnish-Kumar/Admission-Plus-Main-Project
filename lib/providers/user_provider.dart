@@ -25,7 +25,8 @@ class UserProvider extends ChangeNotifier {
       collegePreference1: '',
       collegePreference2: '',
       collegePreference3: '',
-      appliedColleges: []);
+      appliedColleges: [],
+      favoriteColleges:[]);
 
   User get user => _user;
 

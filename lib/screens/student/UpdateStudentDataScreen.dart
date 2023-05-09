@@ -85,7 +85,8 @@ class _UpdateStudentDataScreenState extends State<UpdateStudentDataScreen> {
                 collegePreference1: widget.user.collegePreference1,
                 collegePreference2: widget.user.collegePreference2,
                 collegePreference3: widget.user.collegePreference3,
-                appliedColleges: widget.user.appliedColleges));
+                appliedColleges: widget.user.appliedColleges,
+                favoriteColleges:widget.user.favoriteColleges));
   }
 
   @override
