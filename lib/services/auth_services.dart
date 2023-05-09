@@ -73,13 +73,13 @@ class AuthService {
       print(e);
     }
   }
-// Add Student Application to College
-  void updateApplicationCollegeUser(BuildContext context, id, User studentUser) async {
+// Add Student Application in College Profile
+  void updateApplicationCollegeUser(BuildContext context, id, studentUser) async {
     final navigator = Navigator.of(context);
     try {
       http.Response res = await http.patch(
           Uri.parse('${Constant.uri}/api/college/update/application/$id'),
-          body: studentUser.toJson(),
+          body: jsonEncode(studentUser) ,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           });
@@ -101,13 +101,13 @@ class AuthService {
     }
   }
 
-  // Add Student Application to Student Profile
-  void updateApplicationStudentUser(BuildContext context, id, CollegeUser collegeUser) async {
+  // Add Student Application in Student Profile
+  void updateApplicationStudentUser(BuildContext context, id, collegeUser) async {
     final navigator = Navigator.of(context);
     try {
       http.Response res = await http.patch(
           Uri.parse('${Constant.uri}/api/student/update/application/$id'),
-          body: collegeUser.toJson(),
+          body: jsonEncode(collegeUser),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           });
@@ -125,6 +125,30 @@ class AuthService {
           });
     } catch (e) {
       navigator.pop(context);
+      print(e);
+    }
+  }
+
+  void updateFavouriteCollegeInStudentUser(BuildContext context, id, CollegeUser favoriteCollege) async {
+    try {
+      http.Response res = await http.patch(
+          Uri.parse('${Constant.uri}/api/student/update/favorite/$id'),
+          body: favoriteCollege.toJson(),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          });
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            if (res.statusCode == 200) {
+              showSnackBar(context, 'Student Data Updated..!');
+              print(jsonDecode(res.body));
+            } else {
+              showSnackBar(context, 'Student Data Not Updated..!');
+            }
+          });
+    } catch (e) {
       print(e);
     }
   }
@@ -159,7 +183,8 @@ class AuthService {
           collegePreference1: '',
           collegePreference2: '',
           collegePreference3: '',
-          appliedColleges: []);
+          appliedColleges: [],
+          favoriteColleges:[]);
       final navigator = Navigator.of(context);    
       http.Response res = await http.post(
           Uri.parse('${Constant.uri}/api/signup'),
@@ -193,6 +218,7 @@ class AuthService {
           id: '',
           email: email,
           collegeName: collegeName,
+          collegeImageUrl: '',
           description: '',
           token: '',
           password: password,
@@ -204,7 +230,8 @@ class AuthService {
           affiliatedTo: '',
           website: '',
           applicationFee: '',
-          studentsApplied: []);
+          studentsApplied: [],
+          isFavorite: false);
       final navigator = Navigator.of(context);    
       http.Response res = await http.post(
           Uri.parse('${Constant.uri}/api/college/signup'),

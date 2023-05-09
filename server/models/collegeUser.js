@@ -26,6 +26,10 @@ const collegeUserSchema = mongoose.Schema({
         required:false,
         type:String,
     },
+    collegeImageUrl:{
+        required:false,
+        type:String,
+    },
     location:{
         required:false,
         type:String,
@@ -53,6 +57,10 @@ const collegeUserSchema = mongoose.Schema({
     applicationFee:{
         required: false,
         type: String,
+    },
+    isFavorite:{
+        required:false,
+        type:Boolean,
     },
     studentsApplied:{
     }

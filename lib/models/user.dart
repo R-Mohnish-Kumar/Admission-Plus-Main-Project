@@ -26,6 +26,7 @@ class User {
   final String? collegePreference2;
   final String? collegePreference3;
   final List? appliedColleges;
+  final List? favoriteColleges;
 
   User(
       {required this.id,
@@ -50,7 +51,8 @@ class User {
       required this.collegePreference1,
       required this.collegePreference2,
       required this.collegePreference3,
-      required this.appliedColleges});
+      required this.appliedColleges,
+      required this.favoriteColleges});
 
 Map<String, dynamic> toMap() {
     return {
@@ -76,6 +78,7 @@ Map<String, dynamic> toMap() {
       'collegePreference2':collegePreference2,
       'collegePreference3':collegePreference3,
       'appliedColleges' : appliedColleges,
+      'favoriteColleges' : favoriteColleges,
     };
   }
 
@@ -104,6 +107,7 @@ Map<String, dynamic> toMap() {
       collegePreference2: map['collegePreference2'] ?? '',
       collegePreference3: map['collegePreference3'] ?? '',
       appliedColleges:map['appliedColleges'] ?? [],
+      favoriteColleges:map['favoriteColleges'] ?? [],
 
     );
   }

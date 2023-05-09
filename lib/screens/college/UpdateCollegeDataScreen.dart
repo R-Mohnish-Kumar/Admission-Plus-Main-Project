@@ -24,10 +24,11 @@ class _UpdateCollegeDataScreenState extends State<UpdateCollegeDataScreen> {
   final websiteInput = TextEditingController();
   final departmentInput = TextEditingController();
   final coursesInput = TextEditingController();
+  final collegeImageUrlInput = TextEditingController();
   final authServices = AuthService();
 
-  List enteredCourses=[];
-  List enteredDepartments=[];
+  List enteredCourses = [];
+  List enteredDepartments = [];
 
   void submitDepartmentData() {
     final enteredDepartment = departmentInput.text;
@@ -39,6 +40,7 @@ class _UpdateCollegeDataScreenState extends State<UpdateCollegeDataScreen> {
       departmentInput.clear();
     });
   }
+
   void submitCourseData() {
     final enteredCourse = coursesInput.text;
     if (enteredCourse.isEmpty) {
@@ -62,6 +64,9 @@ class _UpdateCollegeDataScreenState extends State<UpdateCollegeDataScreen> {
             collegeName: collegeNameInput.text == ''
                 ? widget.collegeUser.collegeName
                 : collegeNameInput.text,
+            collegeImageUrl: collegeImageUrlInput.text == ''
+                ? widget.collegeUser.collegeImageUrl
+                : collegeImageUrlInput.text,
             description: descriptionInput.text == ''
                 ? widget.collegeUser.description
                 : descriptionInput.text,
@@ -90,7 +95,8 @@ class _UpdateCollegeDataScreenState extends State<UpdateCollegeDataScreen> {
             applicationFee: applicationFeeInput.text == ''
                 ? widget.collegeUser.applicationFee
                 : applicationFeeInput.text,
-                studentsApplied: widget.collegeUser.studentsApplied));
+            studentsApplied: widget.collegeUser.studentsApplied,
+            isFavorite: widget.collegeUser.isFavorite));
   }
 
   @override
@@ -169,6 +175,20 @@ class _UpdateCollegeDataScreenState extends State<UpdateCollegeDataScreen> {
             ),
             SizedBox(
               height: 10,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextField(
+              decoration: InputDecoration(
+                  labelText: widget.collegeUser.collegeName == ''
+                      ? 'update college image (url)'
+                      : widget.collegeUser.collegeName,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15))),
+              cursorColor: Theme.of(context).primaryColor,
+              controller: collegeNameInput,
+              onSubmitted: (_) {},
             ),
             TextField(
               decoration: InputDecoration(

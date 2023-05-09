@@ -3,6 +3,7 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 import '../../services/auth_services.dart';
 import 'package:admission_plus/models/collegeUser.dart';
 import 'package:admission_plus/models/user.dart';
+
 class PreferenceAndApplyScreen extends StatefulWidget {
   List departments;
   String applicationFee;
@@ -14,7 +15,14 @@ class PreferenceAndApplyScreen extends StatefulWidget {
   String studentContact;
   CollegeUser collegeUser;
   User user;
-  PreferenceAndApplyScreen(this.departments, this.applicationFee, this.studentName,this.studentEmail,this.studentContact,this.collegeUser,this.user) {
+  PreferenceAndApplyScreen(
+      this.departments,
+      this.applicationFee,
+      this.studentName,
+      this.studentEmail,
+      this.studentContact,
+      this.collegeUser,
+      this.user) {
     selectedValue1 = departments[0];
     preferenceValue2 = departments[0];
     preferencevalue3 = departments[0];
@@ -37,21 +45,74 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
   }
 
   void handlePaymentSuccess(PaymentSuccessResponse response) {
-    print('Payment Successfull : ${response.paymentId} ${response.orderId} ${response.signature}');
+    print(
+        'Payment Successfull : ${response.paymentId} ${response.orderId} ${response.signature}');
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
               title: const Text('Payment Successful..!'),
-              content: Text(
-                  'Payment Details :- Payment Id: ${response.paymentId}'),
+              content:
+                  Text('Payment Details :- Payment Id: ${response.paymentId}'),
               actions: [
                 TextButton(
                     onPressed: () => Navigator.of(context).pop(),
                     child: Text('Okay')),
               ],
             ));
-      authServices.updateApplicationCollegeUser(context,widget.collegeUser.id , widget.user);
-      authServices.updateApplicationStudentUser(context,widget.user.id, widget.collegeUser);
+            
+    
+    final studentData={
+      'id': widget.user.id,
+      'email': widget.user.email,
+      'name': widget.user.name,
+      'token': widget.user.token,
+      'password': widget.user.password,
+      'dateOfBirth': widget.user.dateOfBirth,
+      'contactNo': widget.user.contactNo,
+      'fatherName': widget.user.fatherName,
+      'fathersOccupation': widget.user.fathersOccupation,
+      'motherName': widget.user.motherName,
+      'address': widget.user.address,
+      'district': '',
+      'pincode': '',
+      'XthMarks': widget.user.XthMarks,
+      'XthMarksheetLink': widget.user.XthMarksheetLink,
+      'schoolName': widget.user.schoolName,
+      'XIIthMarks': widget.user.XIIthMarks,
+      'XIIthMarksheetLink': widget.user.XIIthMarksheetLink,
+      'highSchoolName': widget.user.highSchoolName,
+      'collegePreference1': widget.selectedValue1,
+      'collegePreference2': widget.preferenceValue2,
+      'collegePreference3': widget.preferencevalue3,
+      'appliedColleges': widget.user.appliedColleges
+    };
+    
+    final collegeData={
+      'id': widget.collegeUser.id,
+      'email': widget.collegeUser.email,
+      'collegeImageUrl':widget.collegeUser.collegeImageUrl,
+      'collegeName': widget.collegeUser.collegeName,
+      'description': widget.collegeUser.description,
+      'token': widget.collegeUser.token,
+      'password': widget.collegeUser.password,
+      'location': widget.collegeUser.location,
+      'courses': widget.collegeUser.courses,
+      'departments': widget.collegeUser.departments,
+      'foundedYear': widget.collegeUser.foundedYear,
+      'rank': widget.collegeUser.rank,
+      'collegePreference1': widget.selectedValue1,
+      'collegePreference2': widget.preferenceValue2,
+      'collegePreference3': widget.preferencevalue3,
+      'affiliatedTo': widget.collegeUser.affiliatedTo,
+      'website': widget.collegeUser.website,
+      'applicationFee': widget.collegeUser.applicationFee,
+      'studentsApplied': widget.collegeUser.studentsApplied
+    };
+   // authServices.updateAppliedCollegeInUser(context: context, id: widget.user.id, appliedCollegeData: collegeData);
+    authServices.updateApplicationCollegeUser(
+        context, widget.collegeUser.id, studentData);
+    authServices.updateApplicationStudentUser(
+        context, widget.user.id, collegeData);  
   }
 
   void handlePaymentFailure(PaymentFailureResponse response) {
@@ -61,8 +122,7 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
         context: context,
         builder: (ctx) => AlertDialog(
               title: Text('Payment Failed..:('),
-              content: Text(
-                  'Error: ${response.error}'),
+              content: Text('Error: ${response.error}'),
               actions: [
                 TextButton(
                     onPressed: () => Navigator.of(context).pop(),
@@ -70,15 +130,14 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
               ],
             ));
   }
+
   void handleWallet(ExternalWalletResponse response) {
-    print(
-        'External Wallet : ${response.walletName} ');
+    print('External Wallet : ${response.walletName} ');
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
               title: Text('External Wallet'),
-              content: Text(
-                  'Wallet: ${response.walletName}'),
+              content: Text('Wallet: ${response.walletName}'),
               actions: [
                 TextButton(
                     onPressed: () => Navigator.of(context).pop(),
@@ -86,6 +145,7 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
               ],
             ));
   }
+
   final authServices = AuthService();
   @override
   Widget build(BuildContext context) {
@@ -232,19 +292,19 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
                   final total = int.parse(widget.applicationFee);
                   final name = widget.studentName;
                   final description = 'Payment for Application';
-                  var options={
-                    'key':'rzp_test_HnLggoCBC27Maf',
-                    'amount':total * 100,
-                    'name' : name,
-                    'description' : description,
-                    'prefill':{
-                      'contact':widget.studentContact,
-                      'email':widget.studentEmail
+                  var options = {
+                    'key': 'rzp_test_HnLggoCBC27Maf',
+                    'amount': total * 100,
+                    'name': name,
+                    'description': description,
+                    'prefill': {
+                      'contact': widget.studentContact,
+                      'email': widget.studentEmail
                     },
                   };
-                  try{
+                  try {
                     razorPay.open(options);
-                  }catch(e){
+                  } catch (e) {
                     debugPrint(e.toString());
                   }
                 },
