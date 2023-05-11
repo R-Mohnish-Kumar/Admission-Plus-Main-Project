@@ -12,6 +12,11 @@ authRouter.get("/getcollege",async(req,res)=>{
     res.send(data);
 });
 
+authRouter.get("/getstudents",async(req,res)=>{
+    const data = await User.find({}); 
+    res.send(data);
+});
+
 
 //Student SignUp
 authRouter.post("/api/signup", async (req, res) => {
@@ -203,7 +208,7 @@ authRouter.patch("/api/college/update/application/:id", async (req,res)=>{
     const updateData=req.body;
     await CollegeUser.updateOne(
         {_id: req.params.id},
-        {$push:{'studentsApplied':updateData}}).then((err,result)=>{
+        {$addToSet:{'studentsApplied':updateData}}).then((err,result)=>{
             if(err) return res.status(500).json({msg:err});
             const msg={
                 msg:"Data Updated Successfully..!",
@@ -222,7 +227,7 @@ authRouter.patch("/api/student/update/application/:id", async (req,res)=>{
     const updateData=req.body;
     await User.updateOne(
         {_id: req.params.id},
-        {$push:{'appliedColleges':updateData}}).then((err,result)=>{
+        {$addToSet:{'appliedColleges':updateData}}).then((err,result)=>{
             if(err) return res.status(500).json({msg:err});
             const msg={
                 msg:"Data Updated Successfully..!",
@@ -234,6 +239,25 @@ authRouter.patch("/api/student/update/application/:id", async (req,res)=>{
         res.status(500).json({error: e.message});
     }
 })
+
+authRouter.patch("/api/student/update/application/isaccepted/:id", async (req,res)=>{
+    try{
+    const updateData=req.body;
+    await User.updateOne(
+        {_id: req.params.id},
+        {$set:{'isAccepted':updateData}}).then((err,result)=>{
+            if(err) return res.status(500).json({msg:err});
+            const msg={
+                msg:"Data Updated Successfully..!",
+                id:req.params.id,
+            };
+            return res.json(msg);
+        });
+    }catch(e){
+        res.status(500).json({error: e.message});
+    }
+})
+
 //Add Favorite College to Student Profile
 authRouter.patch("/api/student/update/favorite/:id", async (req,res)=>{
     try{
@@ -241,6 +265,25 @@ authRouter.patch("/api/student/update/favorite/:id", async (req,res)=>{
     await User.updateOne(
         {_id: req.params.id},
         {$addToSet:{'favoriteColleges':updateData}}).then((err,result)=>{
+            if(err) return res.status(500).json({msg:err});
+            const msg={
+                msg:"Data Updated Successfully..!",
+                id:req.params.id,
+            };
+            return res.json(msg);
+        });
+    }catch(e){
+        res.status(500).json({error: e.message});
+    }
+})
+
+authRouter.patch("/api/college/accepted/:id", async (req,res)=>{
+    try{
+    const updateData=req.body;
+    //$set:{'isAccepted':true};
+    await CollegeUser.updateOne(
+        {_id: req.params.id},
+        {$addToSet:{'acceptedApplication':updateData}}).then((err,result)=>{
             if(err) return res.status(500).json({msg:err});
             const msg={
                 msg:"Data Updated Successfully..!",

@@ -1,24 +1,69 @@
+import 'dart:convert';
+
 import 'package:admission_plus/screens/student/MainDrawer.dart';
+import 'package:admission_plus/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../models/user.dart';
 import '../../providers/user_provider.dart';
 import 'UpdateStudentDataScreen.dart';
 
 class StudentProfile extends StatefulWidget {
   static const routeName = "student-profile";
+  AuthService authService = AuthService();
 
   @override
   _StudentProfileState createState() => _StudentProfileState();
 }
 
+// Future<User> fetchStudentProfile() async {
+//   final response =
+//       await http.get(Uri.parse("http://10.0.2.2:3000/getstudents"),);
+//   if (response.statusCode == 200) {
+//     print(response.body);
+//     return User.fromJson(json.decode(response.body));
+//   } else {
+//     throw Exception('Failed to Load Student Data');
+//   }
+// }
+
 class _StudentProfileState extends State<StudentProfile> {
+  late Future<User> studentData;
+  @override
+  void initState() {
+    super.initState();
+    //studentData=widget.authService.displayStudents(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        actions: [
+                          TextButton(
+                              onPressed: Navigator.of(context).pop,
+                              child: Text('Okay'))
+                        ],
+                        title: Text('Document Information..!',style: TextStyle(fontFamily: 'Raleway',fontSize: 18,fontWeight: FontWeight.bold),),
+                        content: Text(
+                            "Applicant has to upload the following documents in the Google Drive(access to anyone):- \n \u2022 Xth Marksheet\n \u2022 XIIth Marksheet\n \u2022 Applicant Passport Size Photo\n"),
+                      );
+                    });
+              },
+              icon: Icon(Icons.info_outline))
+        ],
         title: Text('Profile',
             style: TextStyle(fontSize: 20, fontFamily: 'Raleway-Bold')),
       ),
@@ -65,7 +110,7 @@ class _StudentProfileState extends State<StudentProfile> {
                       indent: 6,
                       color: Theme.of(context).primaryColor),
                   Container(
-                    height: 30,
+                    height: 35,
                     child: ListTile(
                       leading: Icon(
                         Icons.call,
@@ -78,16 +123,20 @@ class _StudentProfileState extends State<StudentProfile> {
                                   fontFamily: "Raleway",
                                   fontStyle: FontStyle.italic,
                                   color: Colors.black))
-                          : Text(user.contactNo!,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: "Raleway",
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black)),
+                          : InkWell(
+                              onTap: () =>
+                                  launchUrl(Uri.parse('tel:'+user.contactNo!)),
+                              child: Text(
+                                user.contactNo!,
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 15),
+                              ),
+                            ),
                     ),
                   ),
                   Container(
-                    height: 30,
+                    height: 35,
                     child: ListTile(
                       leading: Icon(
                         Icons.email,
@@ -109,7 +158,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     ),
                   ),
                   Container(
-                    height: 30,
+                    height: 35,
                     child: ListTile(
                       leading: Icon(
                         Icons.date_range,
@@ -131,7 +180,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     ),
                   ),
                   Container(
-                    height: 30,
+                    height: 35,
                     child: ListTile(
                       leading: Icon(
                         Icons.person,
@@ -153,7 +202,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     ),
                   ),
                   Container(
-                    height: 30,
+                    height: 35,
                     child: ListTile(
                       leading: Icon(
                         Icons.person_2,
@@ -175,7 +224,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     ),
                   ),
                   Container(
-                    height: 30,
+                    height: 35,
                     child: ListTile(
                       leading: Icon(
                         Icons.work,
@@ -197,7 +246,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     ),
                   ),
                   Container(
-                    height: 30,
+                    height: 35,
                     child: ListTile(
                       leading: Icon(
                         Icons.ten_mp,
@@ -210,7 +259,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                   fontFamily: "Raleway",
                                   fontStyle: FontStyle.italic,
                                   color: Colors.black))
-                          : Text('Secured '+user.XthMarks!+' in SSC.',
+                          : Text('Secured ' + user.XthMarks! + ' in SSC.',
                               style: TextStyle(
                                   fontSize: 15,
                                   fontFamily: "Raleway",
@@ -219,29 +268,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     ),
                   ),
                   Container(
-                    height: 30,
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.link,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      title: user.XthMarksheetLink == ''
-                          ? Text("Update your Xth marksheet drive link",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: "Raleway",
-                                  fontStyle: FontStyle.italic,
-                                  color: Colors.black))
-                          : Text(user.XthMarksheetLink!,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: "Raleway",
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black)),
-                    ),
-                  ),
-                  Container(
-                    height: 30,
+                    height: 35,
                     child: ListTile(
                       leading: Icon(
                         Icons.school,
@@ -263,7 +290,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     ),
                   ),
                   Container(
-                    height: 30,
+                    height: 35,
                     child: ListTile(
                       leading: Icon(
                         Icons.twelve_mp,
@@ -276,7 +303,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                   fontFamily: "Raleway",
                                   fontStyle: FontStyle.italic,
                                   color: Colors.black))
-                          : Text('Secured '+user.XIIthMarks!+' in HSC.',
+                          : Text('Secured ' + user.XIIthMarks! + ' in HSC.',
                               style: TextStyle(
                                   fontSize: 15,
                                   fontFamily: "Raleway",
@@ -285,29 +312,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     ),
                   ),
                   Container(
-                    height: 30,
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.link,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      title: user.XIIthMarksheetLink == ''
-                          ? Text("Update your XIIth marksheet drive link",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: "Raleway",
-                                  fontStyle: FontStyle.italic,
-                                  color: Colors.black))
-                          : Text(user.XIIthMarksheetLink!,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: "Raleway",
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black)),
-                    ),
-                  ),
-                  Container(
-                    height: 30,
+                    height: 35,
                     child: ListTile(
                       leading: Icon(
                         Icons.groups_3,
@@ -329,7 +334,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     ),
                   ),
                   Container(
-                    height: 30,
+                    height: 35,
                     child: ListTile(
                       leading: Icon(
                         Icons.location_city,
@@ -342,15 +347,34 @@ class _StudentProfileState extends State<StudentProfile> {
                                   fontFamily: "Raleway",
                                   fontStyle: FontStyle.italic,
                                   color: Colors.black))
-                          : FittedBox(
-                              child: Text(
-                                  user.address!,
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: "Raleway",
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black)),
-                            ),
+                          : Text(user.address!,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: "Raleway",
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black)),
+                    ),
+                  ),
+                  Container(
+                    height: 35,
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.link,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      title: user.XIIthMarksheetLink == ''
+                          ? Text("Update your documents drive link",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: "Raleway",
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.black))
+                          : Text(user.XIIthMarksheetLink!,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: "Raleway",
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black)),
                     ),
                   ),
                   Divider(

@@ -7,6 +7,7 @@ class CollegeUser {
   final String email;
   final String collegeName;
   final String collegeImageUrl;
+  final String contact;
   final String description;
   final String token;
   final String password;
@@ -20,12 +21,14 @@ class CollegeUser {
   final String applicationFee;
   bool isFavorite;
   final List studentsApplied;
+  final List acceptedApplication;
 
   CollegeUser(
       {required this.id,
       required this.email,
       required this.collegeName,
       required this.description,
+      required this.contact,
       required this.collegeImageUrl,
       required this.token,
       required this.password,
@@ -38,6 +41,7 @@ class CollegeUser {
       required this.website,
       required this.applicationFee,
       required this.studentsApplied,
+      required this.acceptedApplication,
       required this.isFavorite});
 
   Map<String, dynamic> toMap() {
@@ -46,6 +50,7 @@ class CollegeUser {
       'description': description,
       'collegeImageUrl':collegeImageUrl,
       'email': email,
+      'contact':contact,
       'token': token,
       'password': password,
       'location': location,
@@ -57,6 +62,7 @@ class CollegeUser {
       'website': website,
       'applicationFee' : applicationFee,
       'studentsApplied' :studentsApplied,
+      'acceptedApplication':acceptedApplication,
       'isFavorite': isFavorite,
     };
   }
@@ -67,6 +73,7 @@ class CollegeUser {
       collegeName: map['collegeName'] ?? '',
       collegeImageUrl: map['collegeImageUrl'] ?? '',
       description: map['description'] ?? '',
+      contact:map['contact'] ?? '',
       email: map['email'] ?? '',
       token: map['token'] ?? '',
       password: map['password'] ?? '',
@@ -79,6 +86,7 @@ class CollegeUser {
       website: map['website'] ?? '',
       applicationFee: map['applicationFee'] ?? '',
       studentsApplied: map['studentsApplied'] ?? [],
+      acceptedApplication: map['acceptedApplication'] ?? [],
       isFavorite: map['isFavorite'] ?? false,
     );
   }

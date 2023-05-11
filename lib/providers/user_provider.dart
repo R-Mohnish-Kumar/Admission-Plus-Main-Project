@@ -8,6 +8,7 @@ class UserProvider extends ChangeNotifier {
       name: '',
       token: '',
       password: '',
+      studentImageUrl:'',
       dateOfBirth: '',
       contactNo: '',
       fatherName: '',

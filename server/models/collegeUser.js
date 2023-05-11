@@ -22,6 +22,10 @@ const collegeUserSchema = mongoose.Schema({
         required:true,
         type:String,
     },
+    contact:{
+        required:false,
+        type:String,
+    },
     description:{
         required:false,
         type:String,
@@ -63,7 +67,10 @@ const collegeUserSchema = mongoose.Schema({
         type:Boolean,
     },
     studentsApplied:{
-    }
+    },
+    acceptedApplication:{
+
+    },
 });
 const CollegeUser=mongoose.model("College_User",collegeUserSchema);
 module.exports=CollegeUser;

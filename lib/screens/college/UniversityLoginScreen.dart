@@ -55,7 +55,7 @@ class UniversityLoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 250,
+                height: 300,
               ),
               ElevatedButton(
                 onPressed: () => openModalSheet(context),

@@ -64,9 +64,32 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             IconButton(
                 onPressed: () {
-                  signOutUser(context);
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => TabsScreen()));
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(
+                            "Logout..! ",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          content: Text("Are you sure..?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                signOutUser(context);
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => TabsScreen()));
+                              },
+                              child: Text('Yes'),
+                            ),
+                            TextButton(
+                                onPressed: ()=> Navigator.of(context).pop(),
+                                child: Text('No',style: TextStyle(color: Colors.red),))
+                          ],
+                        );
+                      });
                 },
                 icon: Icon(Icons.logout))
           ],
@@ -106,7 +129,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             trailing: TextButton.icon(
                               onPressed: () {
-                                final existingIndex = favoriteColleges.indexWhere((college) => college.id == snapshot.data![i].id);
+                                final existingIndex =
+                                    favoriteColleges.indexWhere((college) =>
+                                        college.id == snapshot.data![i].id);
                                 if (existingIndex >= 0) {
                                   setState(() {
                                     favoriteColleges.removeAt(existingIndex);
@@ -115,10 +140,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   favoriteColleges.add(snapshot.data!
                                       .firstWhere((college) =>
                                           college.id == snapshot.data![i].id));
-                                  authService.updateFavouriteCollegeInStudentUser(context, user.id, snapshot.data!
-                                      .firstWhere((college) =>
-                                          college.id == snapshot.data![i].id));        
+                                  authService
+                                      .updateFavouriteCollegeInStudentUser(
+                                          context,
+                                          user.id,
+                                          snapshot.data!.firstWhere((college) =>
+                                              college.id ==
+                                              snapshot.data![i].id));
                                 }
+                                showSnackBar(context, 'Added to Favorites..;)');
                               },
                               icon: Icon(
                                 Icons.favorite_border,
@@ -130,8 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Theme.of(context).primaryColor),
                               ),
                             ),
-                          )
-                          );
+                          ));
                     }));
               } else if (snapshot.hasError) {
                 return Text(snapshot.error.toString());

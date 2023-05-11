@@ -1,6 +1,11 @@
+import 'package:admission_plus/providers/college_user_provider.dart';
+import 'package:admission_plus/providers/user_provider.dart';
+import 'package:admission_plus/screens/college/HomeScreenCollege.dart';
+import 'package:admission_plus/screens/student/HomeScreen.dart';
 import 'package:admission_plus/screens/student/StudentLoginScreen.dart';
 import 'package:admission_plus/screens/college/UniversityLoginScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TabsScreen extends StatefulWidget {
 
@@ -10,6 +15,7 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

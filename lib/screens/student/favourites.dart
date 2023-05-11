@@ -61,7 +61,7 @@ class Favourites extends StatelessWidget {
                                 color: Theme.of(context).primaryColor,
                               ),
                               label: Text(
-                                'Saved College',
+                                'Saved',
                                 style: TextStyle(
                                     color: Theme.of(context).primaryColor),
                               ),

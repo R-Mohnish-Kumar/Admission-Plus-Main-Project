@@ -8,6 +8,7 @@ class CollegeUserProvider extends ChangeNotifier {
       collegeName: '',
       collegeImageUrl: '',
       description: '',
+      contact:'',
       token: '',
       password: '',
       location: '',
@@ -19,6 +20,7 @@ class CollegeUserProvider extends ChangeNotifier {
       website: '',
       applicationFee: '',
       studentsApplied: [],
+      acceptedApplication:[],
       isFavorite: false);
   CollegeUser get collegeUser => _collegeUser;
 

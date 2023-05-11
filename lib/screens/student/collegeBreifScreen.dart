@@ -88,12 +88,58 @@ class _CollegeBreifScreenState extends State<CollegeBreifScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: (MediaQuery.of(context).size.width) * 0.93,
+                    width: (MediaQuery.of(context).size.width) * 0.92,
                     child: Text(
                         textAlign: TextAlign.justify,
                         style: TextStyle(fontFamily: 'Raleway'),
                         widget.collegeUser.description),
                   ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Email Id',
+                    style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 18),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(fontFamily: 'Raleway'),
+                      widget.collegeUser.email)
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Contact',
+                    style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 18),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(fontFamily: 'Raleway'),
+                      widget.collegeUser.contact)
                 ],
               ),
               SizedBox(
@@ -189,8 +235,8 @@ class _CollegeBreifScreenState extends State<CollegeBreifScreen> {
                         border: Border.all(),
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white),
-                    height: (MediaQuery.of(context).size.height) * 0.13,
-                    width: (MediaQuery.of(context).size.width) * 0.93,
+                    height: (MediaQuery.of(context).size.height) * 0.12,
+                    width: (MediaQuery.of(context).size.width) * 0.92,
                     padding: EdgeInsets.all(5),
                     child: ListView.builder(
                       itemBuilder: ((context, index) {
@@ -226,8 +272,8 @@ class _CollegeBreifScreenState extends State<CollegeBreifScreen> {
                         border: Border.all(),
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white),
-                    height: (MediaQuery.of(context).size.height) * 0.13,
-                    width: (MediaQuery.of(context).size.width) * 0.93,
+                    height: (MediaQuery.of(context).size.height) * 0.12,
+                    width: (MediaQuery.of(context).size.width) * 0.92,
                     padding: EdgeInsets.all(5),
                     child: ListView.builder(
                       itemBuilder: ((context, index) {

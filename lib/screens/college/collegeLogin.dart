@@ -14,6 +14,7 @@ class _CollegeLoginScreenState extends State<CollegeLoginScreen> {
   final emailInput = TextEditingController();
   final passwordInput = TextEditingController();
   final authService = AuthService();
+  bool passwordVisible = true;
 
   void signInCollege() {
     authService.signInCollegeUser(
@@ -24,9 +25,9 @@ class _CollegeLoginScreenState extends State<CollegeLoginScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: EdgeInsets.only(
-              left: 10,
-              right: 10,
-              bottom: MediaQuery.of(context).viewInsets.bottom + 10),
+          left: 10,
+          right: 10,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -51,9 +52,22 @@ class _CollegeLoginScreenState extends State<CollegeLoginScreen> {
           SizedBox(
             height: 10,
           ),
-          TextField(
+          TextField(obscureText: passwordVisible,
             decoration: InputDecoration(
-                labelText: 'password', border: OutlineInputBorder()),
+              labelText: 'password',
+              border: OutlineInputBorder(),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  color: Theme.of(context).primaryColorDark,
+                ),
+                onPressed: () {
+                  setState(() {
+                    passwordVisible = !passwordVisible;
+                  });
+                },
+              ),
+            ),
             cursorColor: Theme.of(context).primaryColor,
             controller: passwordInput,
             keyboardType: TextInputType.visiblePassword,
@@ -65,11 +79,12 @@ class _CollegeLoginScreenState extends State<CollegeLoginScreen> {
           ElevatedButton(
             onPressed: () {
               signInCollege();
-            } ,
+              
+            },
             child: Text(
               '       Sign In       ',
-              style: TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold),
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             style: ElevatedButton.styleFrom(
               shape: StadiumBorder(),

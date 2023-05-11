@@ -27,7 +27,7 @@ class MainDrawerCollege extends StatelessWidget {
           padding: EdgeInsets.all(20),
           alignment: Alignment.centerLeft,
           child: Text(
-            'Hi..! '+ collegeName,
+            'Hi..! '+ collegeName.substring(0,collegeName.indexOf('@')),
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Raleway',

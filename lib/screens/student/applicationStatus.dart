@@ -157,8 +157,8 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text(
-                                'Status: Applied',
+                              Text(collegeAppliedData[index]['isAccepted'] == false?
+                                'Status: Applied' : 'Status: Accepted',
                                 style: TextStyle(
                                     fontFamily: 'Raleway',
                                     fontWeight: FontWeight.bold,
