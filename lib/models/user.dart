@@ -10,6 +10,7 @@ class User {
   final String? password;
   final String? dateOfBirth;
   final String? contactNo;
+  final String? studentImageUrl;
   final String? fatherName;
   final String? fathersOccupation;
   final String? motherName;
@@ -35,6 +36,7 @@ class User {
       required this.token,
       required this.password,
       required this.dateOfBirth,
+      required this.studentImageUrl,
       required this.contactNo,
       required this.fatherName,
       required this.fathersOccupation,
@@ -62,6 +64,7 @@ Map<String, dynamic> toMap() {
       'password': password,
       'dateOfBirth':dateOfBirth,
       'contactNo':contactNo,
+      'studentImageUrl':studentImageUrl,
       'fatherName':fatherName,
       'fathersOccupation':fathersOccupation,
       'motherName':motherName,
@@ -90,6 +93,7 @@ Map<String, dynamic> toMap() {
       token: map['token'] ?? '',
       password: map['password'] ?? '',
       dateOfBirth: map['dateOfBirth'] ?? '',
+      studentImageUrl: map['studentImageUrl'] ?? '',
       contactNo: map['contactNo'] ?? '',
       fatherName: map['fatherName'] ?? '',
       fathersOccupation: map['fathersOccupation'] ?? '',

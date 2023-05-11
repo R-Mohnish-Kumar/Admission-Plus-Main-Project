@@ -22,6 +22,10 @@ const userSchema = mongoose.Schema({
         required:true,
         type:String,
     },
+    studentImageUrl:{
+        required: false,
+        type:String,
+    },
     dateOfBirth:{
         required:false,
         type:String,

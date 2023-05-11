@@ -28,6 +28,7 @@ class _UpdateStudentDataScreenState extends State<UpdateStudentDataScreen> {
   final XIIthMarksInput = TextEditingController();
   final XIIthMarksheetLinkInput = TextEditingController();
   final schoolNameInput = TextEditingController();
+  final studentImageUrlInput = TextEditingController();
   final highSchoolInput = TextEditingController();
   final authServices = AuthService();
   
@@ -44,6 +45,7 @@ class _UpdateStudentDataScreenState extends State<UpdateStudentDataScreen> {
                 : fullNameInput.text,
             token: widget.user.token,
             password: widget.user.password,
+            studentImageUrl:studentImageUrlInput.text == '' ? widget.user.studentImageUrl : studentImageUrlInput.text,
             dateOfBirth: dateOfBirthInput.text == ''
                 ? widget.user.dateOfBirth
                 : dateOfBirthInput.text,
@@ -166,7 +168,7 @@ class _UpdateStudentDataScreenState extends State<UpdateStudentDataScreen> {
             SizedBox(
               height: 10,
             ),
-            TextField(
+            TextField(keyboardType: TextInputType.phone ,
               decoration: InputDecoration(
                   labelText: widget.user.contactNo == ''
                       ? 'update contact number'
@@ -266,20 +268,6 @@ class _UpdateStudentDataScreenState extends State<UpdateStudentDataScreen> {
             ),
             TextField(
               decoration: InputDecoration(
-                  labelText: widget.user.XthMarksheetLink == ''
-                      ? 'update Xth marksheet drive link'
-                      : widget.user.XthMarksheetLink,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15))),
-              cursorColor: Theme.of(context).primaryColor,
-              controller: XthMarksheetLinkInput,
-              onSubmitted: (_) {},
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextField(
-              decoration: InputDecoration(
                   labelText: widget.user.XIIthMarks == ''
                       ? 'update XIIth marks'
                       : widget.user.XIIthMarks,
@@ -294,22 +282,8 @@ class _UpdateStudentDataScreenState extends State<UpdateStudentDataScreen> {
             ),
             TextField(
               decoration: InputDecoration(
-                  labelText: widget.user.XIIthMarksheetLink == ''
-                      ? 'update XIIth marksheet drive link'
-                      : widget.user.XIIthMarksheetLink,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15))),
-              cursorColor: Theme.of(context).primaryColor,
-              controller: XIIthMarksheetLinkInput,
-              onSubmitted: (_) {},
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextField(
-              decoration: InputDecoration(
                   labelText: widget.user.schoolName == ''
-                      ? 'update schoool name'
+                      ? 'update school name'
                       : widget.user.schoolName,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15))),
@@ -329,6 +303,20 @@ class _UpdateStudentDataScreenState extends State<UpdateStudentDataScreen> {
                       borderRadius: BorderRadius.circular(15))),
               cursorColor: Theme.of(context).primaryColor,
               controller: highSchoolInput,
+              onSubmitted: (_) {},
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextField(
+              decoration: InputDecoration(
+                  labelText: widget.user.XIIthMarksheetLink == ''
+                      ? 'update documents drive link'
+                      : widget.user.XIIthMarksheetLink,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15))),
+              cursorColor: Theme.of(context).primaryColor,
+              controller: XIIthMarksheetLinkInput,
               onSubmitted: (_) {},
             ),
             SizedBox(

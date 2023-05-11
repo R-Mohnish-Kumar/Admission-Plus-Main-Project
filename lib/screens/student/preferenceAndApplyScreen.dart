@@ -76,15 +76,15 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
       'district': '',
       'pincode': '',
       'XthMarks': widget.user.XthMarks,
-      'XthMarksheetLink': widget.user.XthMarksheetLink,
       'schoolName': widget.user.schoolName,
       'XIIthMarks': widget.user.XIIthMarks,
-      'XIIthMarksheetLink': widget.user.XIIthMarksheetLink,
+      'documentsDriveLink': widget.user.XIIthMarksheetLink,
       'highSchoolName': widget.user.highSchoolName,
       'collegePreference1': widget.selectedValue1,
       'collegePreference2': widget.preferenceValue2,
       'collegePreference3': widget.preferencevalue3,
-      'appliedColleges': widget.user.appliedColleges
+      'appliedColleges': widget.user.appliedColleges,
+      'isAccepted':false,
     };
     
     final collegeData={
@@ -106,7 +106,8 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
       'affiliatedTo': widget.collegeUser.affiliatedTo,
       'website': widget.collegeUser.website,
       'applicationFee': widget.collegeUser.applicationFee,
-      'studentsApplied': widget.collegeUser.studentsApplied
+      'studentsApplied': widget.collegeUser.studentsApplied,
+      'isAccepted':false,
     };
    // authServices.updateAppliedCollegeInUser(context: context, id: widget.user.id, appliedCollegeData: collegeData);
     authServices.updateApplicationCollegeUser(
@@ -201,6 +202,7 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
                 ],
               ),
               DropdownButtonFormField(
+                isExpanded: true,
                   value: widget.selectedValue1,
                   items: widget.departments
                       .map((e) => DropdownMenuItem(
@@ -229,6 +231,7 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
                 ],
               ),
               DropdownButtonFormField(
+                isExpanded: true,
                   value: widget.preferenceValue2,
                   items: widget.departments
                       .map((e) => DropdownMenuItem(
@@ -257,6 +260,7 @@ class _PreferenceAndApplyScreenState extends State<PreferenceAndApplyScreen> {
                 ],
               ),
               DropdownButtonFormField(
+                isExpanded: true,
                   value: widget.preferencevalue3,
                   items: widget.departments
                       .map((e) => DropdownMenuItem(

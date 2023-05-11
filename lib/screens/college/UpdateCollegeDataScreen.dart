@@ -16,6 +16,7 @@ class _UpdateCollegeDataScreenState extends State<UpdateCollegeDataScreen> {
   final collegeNameInput = TextEditingController();
   final collegeEmailInput = TextEditingController();
   final descriptionInput = TextEditingController();
+  final contactInput = TextEditingController();
   final locationInput = TextEditingController();
   final rankInput = TextEditingController();
   final affiliatedToInput = TextEditingController();
@@ -64,6 +65,7 @@ class _UpdateCollegeDataScreenState extends State<UpdateCollegeDataScreen> {
             collegeName: collegeNameInput.text == ''
                 ? widget.collegeUser.collegeName
                 : collegeNameInput.text,
+            contact:widget.collegeUser.contact,    
             collegeImageUrl: collegeImageUrlInput.text == ''
                 ? widget.collegeUser.collegeImageUrl
                 : collegeImageUrlInput.text,
@@ -96,6 +98,7 @@ class _UpdateCollegeDataScreenState extends State<UpdateCollegeDataScreen> {
                 ? widget.collegeUser.applicationFee
                 : applicationFeeInput.text,
             studentsApplied: widget.collegeUser.studentsApplied,
+            acceptedApplication:widget.collegeUser.acceptedApplication,
             isFavorite: widget.collegeUser.isFavorite));
   }
 
@@ -175,6 +178,17 @@ class _UpdateCollegeDataScreenState extends State<UpdateCollegeDataScreen> {
             ),
             SizedBox(
               height: 10,
+            ),
+            TextField(keyboardType: TextInputType.phone,
+              decoration: InputDecoration(
+                  labelText: widget.collegeUser.contact == ''
+                      ? 'update contact'
+                      : widget.collegeUser.contact,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15))),
+              cursorColor: Theme.of(context).primaryColor,
+              controller: contactInput,
+              onSubmitted: (_) {},
             ),
             SizedBox(
               height: 10,
@@ -303,15 +317,18 @@ class _UpdateCollegeDataScreenState extends State<UpdateCollegeDataScreen> {
                     onSubmitted: (_) {},
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: submitDepartmentData,
-                  child: Text('Add Department'),
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Theme.of(context).primaryColor),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)))),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  child: ElevatedButton(
+                    onPressed: submitDepartmentData,
+                    child: Text('Add Department',textAlign: TextAlign.center,),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)))),
+                  ),
                 )
               ],
             ),

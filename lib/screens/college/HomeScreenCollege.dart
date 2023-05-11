@@ -1,6 +1,7 @@
 import 'package:admission_plus/providers/college_user_provider.dart';
 import 'package:admission_plus/screens/TabsScreen.dart';
 import 'package:admission_plus/screens/college/MainDrawerCollege.dart';
+import 'package:admission_plus/screens/college/studentBreifScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/user_provider.dart';
@@ -43,7 +44,13 @@ class _HomeScreenCollegeState extends State<HomeScreenCollege> {
                           elevation: 10,
                           shadowColor: Theme.of(context).primaryColor,
                           child: ListTile(
-                            onTap: () {},
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (ctx) {
+                                    return StudentBreifScreen(user,user.studentsApplied[index]);
+                                  });
+                            },
                             leading: CircleAvatar(
                                 child: Image.asset(
                               "assets/graduated.png",
@@ -56,18 +63,6 @@ class _HomeScreenCollegeState extends State<HomeScreenCollege> {
                             subtitle: Text(
                               user.studentsApplied[index].email!,
                               style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            trailing: TextButton.icon(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.favorite_border,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              label: Text(
-                                'Save',
-                                style: TextStyle(
-                                    color: Theme.of(context).primaryColor),
-                              ),
                             ),
                           ));
           }),

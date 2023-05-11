@@ -1,9 +1,17 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 
+
 void showSnackBar(BuildContext context, String text) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+  try{
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+    });
+  }catch(e){
+    print(e);
+  }
 }
 
 void httpErrorHandle({

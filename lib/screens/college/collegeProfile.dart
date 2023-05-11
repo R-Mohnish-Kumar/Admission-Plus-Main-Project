@@ -3,6 +3,7 @@ import 'package:admission_plus/screens/college/MainDrawerCollege.dart';
 import 'package:admission_plus/screens/college/UpdateCollegeDataScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CollegeProfile extends StatefulWidget {
   const CollegeProfile({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class _CollegeProfileState extends State<CollegeProfile> {
         title: Text('College Profile',
             style: TextStyle(fontSize: 20, fontFamily: 'Raleway-Bold')),
       ),
-      drawer: MainDrawerCollege(collegeUser.collegeName),
+      drawer: MainDrawerCollege(collegeUser.email),
       body: Container(
         padding: EdgeInsets.all(10),
         height: MediaQuery.of(context).size.height,
@@ -65,7 +66,9 @@ class _CollegeProfileState extends State<CollegeProfile> {
                       indent: 6,
                       color: Theme.of(context).primaryColor),
                   Container(
-                    height: collegeUser.description =='' ? 30: MediaQuery.of(context).size.height * 0.66,
+                    height: collegeUser.description == ''
+                        ? 30
+                        : MediaQuery.of(context).size.height * 0.66,
                     child: ListTile(
                       leading: Icon(
                         Icons.description,
@@ -112,6 +115,32 @@ class _CollegeProfileState extends State<CollegeProfile> {
                     height: 30,
                     child: ListTile(
                       leading: Icon(
+                        Icons.email,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      title: collegeUser.contact == ''
+                          ? Text("Update your Contact",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: "Raleway",
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.black))
+                          : InkWell(
+                              onTap: () =>
+                                  launchUrl(Uri.parse('tel:'+collegeUser.contact)),
+                              child: Text(
+                                collegeUser.contact,
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 15),
+                              ),
+                            ),
+                    ),
+                  ),
+                  Container(
+                    height: 30,
+                    child: ListTile(
+                      leading: Icon(
                         Icons.location_on,
                         color: Theme.of(context).primaryColor,
                       ),
@@ -138,8 +167,7 @@ class _CollegeProfileState extends State<CollegeProfile> {
                         color: Theme.of(context).primaryColor,
                       ),
                       title: collegeUser.affiliatedTo == ''
-                          ? Text(
-                              "Update your University Affiliated to", 
+                          ? Text("Update your University Affiliated to",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontFamily: "Raleway",
@@ -189,7 +217,7 @@ class _CollegeProfileState extends State<CollegeProfile> {
                                   fontFamily: "Raleway",
                                   fontStyle: FontStyle.italic,
                                   color: Colors.black))
-                          : Text(collegeUser.rank,
+                          : Text(collegeUser.rank+'th Rank',
                               style: TextStyle(
                                   fontSize: 15,
                                   fontFamily: "Raleway",
@@ -211,12 +239,17 @@ class _CollegeProfileState extends State<CollegeProfile> {
                                   fontFamily: "Raleway",
                                   fontStyle: FontStyle.italic,
                                   color: Colors.black))
-                          : Text(collegeUser.website,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: "Raleway",
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black)),
+                          : InkWell(
+                              onTap: () =>
+                                  launchUrl(Uri.parse(collegeUser.website)),
+                              child: Text(
+                                collegeUser.website,
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.blue,
+                                    fontSize: 15),
+                              ),
+                            ),
                     ),
                   ),
                   Container(
@@ -233,7 +266,7 @@ class _CollegeProfileState extends State<CollegeProfile> {
                                   fontFamily: "Raleway",
                                   fontStyle: FontStyle.italic,
                                   color: Colors.black))
-                          : Text(collegeUser.applicationFee,
+                          : Text('Rs.'+collegeUser.applicationFee,
                               style: TextStyle(
                                   fontSize: 15,
                                   fontFamily: "Raleway",

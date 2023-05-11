@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
                 color: Color.fromRGBO(20, 51, 51, 1),
               ),
               headline6: TextStyle(
-                  fontSize: 30,
+                  fontSize: 25,
                   fontFamily: 'Raleway',
                   color: buildMaterialColor(Color.fromRGBO(39, 58, 150, 1))))),
       home: SplashScreen(),
@@ -82,16 +82,19 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return AnimatedSplashScreen(
-        splash: Center(
-          child: Image.asset("assets/ADMISSI.png"),
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-        splashIconSize: 240,
-        duration: 2500,
-        splashTransition: SplashTransition.fadeTransition,
-        pageTransitionType: PageTransitionType.leftToRight,
-        nextScreen:Provider.of<UserProvider>(context).user.token!.isEmpty ? TabsScreen(): const HomeScreen());
+    return ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+      child: AnimatedSplashScreen(
+          splash: Center(
+            child: Image.asset("assets/ADMISSI.png"),
+          ),
+          backgroundColor: Theme.of(context).primaryColor,
+          splashIconSize: 240,
+          duration: 2500,
+          splashTransition: SplashTransition.fadeTransition,
+          pageTransitionType: PageTransitionType.leftToRight,
+          nextScreen:Provider.of<UserProvider>(context).user.token!.isEmpty ? TabsScreen(): const HomeScreen()),
+    );
   }
 }
 

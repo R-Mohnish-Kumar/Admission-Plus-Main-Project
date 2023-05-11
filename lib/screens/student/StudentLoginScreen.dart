@@ -35,7 +35,6 @@ class StudentLoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
         child: Container(
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
@@ -49,13 +48,13 @@ class StudentLoginScreen extends StatelessWidget {
                 child: Container(
                   margin: EdgeInsets.only(top: 70),
                   child: Text(
-                    "Let's Begin.. \nthe Journey as a Freshman",
+                    "Let's Begin..\nthe Journey as a Freshman",
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
               ),
               SizedBox(
-                height: 250,
+                height: 300,
               ),
               ElevatedButton(
                 onPressed: () => openModalSheet(context),
