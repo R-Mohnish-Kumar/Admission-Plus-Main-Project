@@ -4,8 +4,10 @@ import 'package:admission_plus/screens/college/HomeScreenCollege.dart';
 import 'package:admission_plus/screens/student/HomeScreen.dart';
 import 'package:admission_plus/screens/student/StudentLoginScreen.dart';
 import 'package:admission_plus/screens/college/UniversityLoginScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
 
 class TabsScreen extends StatefulWidget {
 
