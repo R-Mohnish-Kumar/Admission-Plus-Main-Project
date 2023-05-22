@@ -195,13 +195,13 @@ class _UpdateCollegeDataScreenState extends State<UpdateCollegeDataScreen> {
             ),
             TextField(
               decoration: InputDecoration(
-                  labelText: widget.collegeUser.collegeName == ''
+                  labelText: widget.collegeUser.collegeImageUrl == ''
                       ? 'update college image (url)'
-                      : widget.collegeUser.collegeName,
+                      : widget.collegeUser.collegeImageUrl,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15))),
               cursorColor: Theme.of(context).primaryColor,
-              controller: collegeNameInput,
+              controller: collegeImageUrlInput,
               onSubmitted: (_) {},
             ),
             TextField(
