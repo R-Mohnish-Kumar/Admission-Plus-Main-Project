@@ -33,12 +33,12 @@ class _TabsScreenState extends State<TabsScreen> {
                   Tab(
                     icon: Icon(Icons.emoji_people),
                     text: "Student",
-                    height: 50,
+                    height: Platform.isIOS ? 60 : 50,
                   ),
                   Tab(
                     icon: Icon(Icons.school),
                     text: "College",
-                    height: 50,
+                    height: Platform.isIOS ? 60 : 50,
                   )
                 ]),
               ],
