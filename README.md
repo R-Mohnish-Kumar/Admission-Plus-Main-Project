@@ -1,16 +1,18 @@
-# Admission Plus: A Flutter based Student Enrolment System
+# Admission Plus - A Flutter based Student Enrolment System
 
-A new Flutter project.
+Admission Plus is an online student registration system that utilizes Flutter, a cross-platform development framework that enables the creation of native-like applications for Android and iOS platforms from a single codebase.t is a mobile application for students and University affiliated colleges that facilitates online application process for management quota. It reduces the manpower needed to facilitate an enrolment process. This application can be accessed by student and all the affiliated colleges. Our application has two types of accessing modes, college administrator and student.
 
-## Getting Started
+## Tech Stack
 
-This project is a starting point for a Flutter application.
+**Frontend:** Flutter, Dart
 
-A few resources to get you started if this is your first Flutter project:
+**Backend:** Node js, Express js, RESTful API
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Database:** MongoDB
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Payment Gateway:** Razorpay
+
+## Demo Link
+
+https://drive.google.com/file/d/1CSKAXIsrTtTJ1hfudGuEa84d9BjGGZEz/view?usp=share_link
+
